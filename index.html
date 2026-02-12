@@ -48,8 +48,8 @@
       noClicks++;
       scaleNo = Math.max(0.35, scaleNo - 0.12);
       scaleSi = Math.min(2.8, scaleSi + 0.18);
-      btnNo.style.transform = scale(${scaleNo});
-      btnSi.style.transform = scale(${scaleSi});
+      btnNo.style.transform = "scale(${scaleNo})";
+      btnSi.style.transform = "scale(${scaleSi}");
 
       if (noClicks === 5) show("🙃 Ya van 5 ‘No’… creo que en el fondo quieres decir que Sí 😌");
       else show(Has dicho “No” ${noClicks} vez/veces…);
