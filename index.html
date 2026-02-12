@@ -3,44 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pregunta</title>
+  <title>San Valentín</title>
   <style>
-    :root { --bg: #f6f6ff; }
-    body{
-      margin:0; min-height:100vh; display:grid; place-items:center;
-      font-family: Arial, sans-serif; background: var(--bg);
-    }
-    .card{
-      background:#fff; width:min(560px, 92vw);
-      border-radius:18px; padding:26px; text-align:center;
-      box-shadow: 0 10px 30px rgba(0,0,0,.08);
-    }
-    h1{ margin:0 0 12px; }
-    p{ margin:0 0 18px; font-size:18px; }
-    .btns{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-top:14px; }
-
-    button{
-      border:0; cursor:pointer;
-      padding:14px 24px; border-radius:999px;
-      font-size:18px; font-weight:700;
-      transition: transform .15s ease, opacity .15s ease;
-      user-select:none;
-    }
-    #btnSi{ background:#22c55e; color:#fff; }
-    #btnNo{ background:#ef4444; color:#fff; }
-
-    .msg{
-      margin-top:16px; font-size:18px;
-      padding:12px 14px; border-radius:12px;
-      background:#f3f4f6;
-      display:none;
-    }
-    .hint{ margin-top:10px; font-size:13px; opacity:.6; }
+    body{margin:0;min-height:100vh;display:grid;place-items:center;font-family:Arial;background:#f6f6ff;}
+    .card{background:#fff;padding:26px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.08);width:min(560px,92vw);text-align:center;}
+    .btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:14px;}
+    button{border:0;cursor:pointer;padding:14px 24px;border-radius:999px;font-size:18px;font-weight:700;transition:transform .15s ease;}
+    #btnSi{background:#22c55e;color:#fff;}
+    #btnNo{background:#ef4444;color:#fff;}
+    #msg{margin-top:16px;background:#f3f4f6;padding:12px 14px;border-radius:12px;display:none;}
+    .hint{margin-top:10px;font-size:13px;opacity:.6;}
   </style>
 </head>
 <body>
   <div class="card">
-    <h1> Quieres ser mi San Valentin?</h1>
+    <h1>¿Quieres ser mi San Valentín? 💘</h1>
     <p>¿Aceptas?</p>
 
     <div class="btns">
@@ -48,52 +25,39 @@
       <button id="btnNo">No</button>
     </div>
 
-    <div id="mensaje" class="msg"></div>
+    <div id="msg"></div>
     <div class="hint">Tip: el “No” se vuelve pequeñito…</div>
   </div>
 
   <script>
     const btnSi = document.getElementById("btnSi");
     const btnNo = document.getElementById("btnNo");
-    const mensaje = document.getElementById("mensaje");
+    const msg = document.getElementById("msg");
 
     let noClicks = 0;
     let siYaFue = false;
-
-    // Escalas iniciales
     let scaleSi = 1;
     let scaleNo = 1;
 
-    function showMsg(text){
-      mensaje.style.display = "block";
-      mensaje.textContent = text;
+    function show(text){
+      msg.style.display = "block";
+      msg.textContent = text;
     }
 
     btnNo.addEventListener("click", () => {
       noClicks++;
-
-      // Cada click en NO: NO más pequeño, SI más grande
-      scaleNo = Math.max(0.35, scaleNo - 0.12);  // límite mínimo
-      scaleSi = Math.min(2.8, scaleSi + 0.18);   // límite máximo
-
+      scaleNo = Math.max(0.35, scaleNo - 0.12);
+      scaleSi = Math.min(2.8, scaleSi + 0.18);
       btnNo.style.transform = scale(${scaleNo});
       btnSi.style.transform = scale(${scaleSi});
 
-      // Al 5to click en NO: mensaje especial
-      if (noClicks === 5) {
-        showMsg("🙃 Ya van 5 ‘No’… creo que en el fondo quieres decir que Sí 😌");
-      } else if (noClicks < 5) {
-        showMsg(Has dicho “No” ${noClicks} vez/veces…);
-      }
+      if (noClicks === 5) show("🙃 Ya van 5 ‘No’… creo que en el fondo quieres decir que Sí 😌");
+      else show(Has dicho “No” ${noClicks} vez/veces…);
     });
 
     btnSi.addEventListener("click", () => {
-      if (!siYaFue) {
-        siYaFue = true;
-        showMsg("🎉 ¡Sabía que dirías que sí! 💖");
-      } else {
-        showMsg("✅ Ya dijiste que Sí 😌");
-      }
+      if (!siYaFue) { siYaFue = true; show("🎉 ¡Sabía que dirías que sí! 💖"); }
+      else show("✅ Ya dijiste que Sí 😌");
     });
   </script>
 </body>
